@@ -39,11 +39,22 @@ fun ProfileSelectionScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (profileList.isEmpty()) {
-                Text("Nenhum perfil encontrado. Crie um novo perfil para continuar.")
+                Text(
+                    text = "Nenhum perfil encontrado.\nCrie um novo perfil para continuar.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
             } else {
-                Text("Selecione um perfil:")
+                Text(
+                    text = "Selecione um perfil:",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.fillMaxWidth()
+                )
                 Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     items(profileList) { profile ->
                         Card(
                             modifier = Modifier
@@ -51,7 +62,7 @@ fun ProfileSelectionScreen(
                                 .padding(vertical = 4.dp),
                             onClick = { onProfileSelected(profile) }
                         ) {
-                            ProfileItem(profile = profile, onProfileSelected = onProfileSelected) // Use o componente ProfileItem
+                            ProfileItem(profile = profile, onProfileSelected = onProfileSelected)
                         }
                     }
                 }
@@ -74,18 +85,18 @@ fun ProfileSelectionScreen(
 fun ProfileItem(profile: UserProfile, onProfileSelected: (UserProfile) -> Unit) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .fillMaxWidth(),
         onClick = { onProfileSelected(profile) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         )
-
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
-        ) {
+        ){
             Icon(
                 imageVector = Icons.Default.Person,
                 contentDescription = "Ícone do perfil",
@@ -95,7 +106,8 @@ fun ProfileItem(profile: UserProfile, onProfileSelected: (UserProfile) -> Unit) 
             Spacer(modifier = Modifier.width(16.dp))
             Text(
                 text = profile.name,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.weight(1f)
             )
         }
     }
@@ -139,7 +151,7 @@ fun AddProfileDialog(
                     }
                 },
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
                 Text("Confirmar")
@@ -149,7 +161,7 @@ fun AddProfileDialog(
             TextButton(
                 onClick = onDismiss,
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
                 Text("Cancelar")

@@ -32,12 +32,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.util.Calendar
+import com.wogoo.tracker.R
+
 
 @Composable
 fun ReminderDialog(
@@ -93,7 +96,7 @@ fun ReminderDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (initialMedicineName.isEmpty()) "Novo Reminder" else "Editar Reminder") },
+        title = { Text(if (initialMedicineName.isEmpty()) "Novo Lembrete" else "Editar Lembrete") },
         text = {
             Column {
                 OutlinedTextField(
@@ -109,7 +112,7 @@ fun ReminderDialog(
                                 }
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Build,
+                                    painter = painterResource(id = R.drawable.document_scanner_24),
                                     contentDescription = "Abrir câmera",
                                 )
                             }
@@ -207,12 +210,12 @@ fun ReminderDialog(
                     }
                 }
             ) {
-                Text("Confirmar", color = MaterialTheme.colorScheme.onPrimary)
+                Text("Confirmar", color = MaterialTheme.colorScheme.onPrimaryContainer)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancelar", color = MaterialTheme.colorScheme.onPrimary)
+                Text("Cancelar", color = MaterialTheme.colorScheme.onPrimaryContainer)
             }
         }
     )

@@ -63,7 +63,11 @@ fun AlarmScreen(
             Text("Nenhum lembrete salvo.", style = MaterialTheme.typography.bodyMedium)
         } else {
             val groupedReminders = reminders.groupBy { it.horario }
-            LazyColumn {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
                 groupedReminders.forEach { (time, remindersForTime) ->
                     item {
                         ExpandableReminderCard(
